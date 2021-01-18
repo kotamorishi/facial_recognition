@@ -8,28 +8,28 @@ import imutils
 import pickle
 import time
 import cv2
-# import RPi.GPIO as GPIO
-# import threading
+import RPi.GPIO as GPIO
+import threading
 
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setwarnings(False)
-# GPIO.setup(18,GPIO.OUT)
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+GPIO.setup(18,GPIO.OUT)
 
-# holdDurationSec = 5
-# lastSeenTimeStamp = 0
-# lastUser = ""
+holdDurationSec = 5
+lastSeenTimeStamp = 0
+lastUser = ""
 
-# def ledThread():
-#     while True:
-#         if lastSeenTimeStamp > (time.time() - holdDurationSec):
-#             GPIO.output(18,GPIO.HIGH)
-#         else:
-#             GPIO.output(18,GPIO.LOW)
-#         time.sleep(0.1) #sleep 100ms
+def ledThread():
+    while True:
+        if lastSeenTimeStamp > (time.time() - holdDurationSec):
+            GPIO.output(18,GPIO.HIGH)
+        else:
+            GPIO.output(18,GPIO.LOW)
+        time.sleep(0.1) #sleep 100ms
         
-# if __name__ == '__main__':
-#     t1 = threading.Thread(target=ledThread)
-#     t1.start()
+if __name__ == '__main__':
+    t1 = threading.Thread(target=ledThread)
+    t1.start()
 
 
 #Initialize 'currentname' to trigger only when a new person is identified.
