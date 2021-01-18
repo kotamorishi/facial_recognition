@@ -18,6 +18,7 @@ GPIO.setup(18,GPIO.OUT)
 holdDurationSec = 5
 lastSeenTimeStamp = 0
 lastUser = ""
+shouldTerminate=False
 
 def ledThread():
     while True:
@@ -26,6 +27,8 @@ def ledThread():
         else:
             GPIO.output(18,GPIO.LOW)
         time.sleep(0.1) #sleep 100ms
+        if shouldTerminate == True:
+            break
         
 if __name__ == '__main__':
     t1 = threading.Thread(target=ledThread)
@@ -144,6 +147,11 @@ while True:
 fps.stop()
 print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
 print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
+
+# wait for the GPIO thread.
+shouldTerminate=True
+t1.join()
+
 
 # do a bit of cleanup
 cv2.destroyAllWindows()
