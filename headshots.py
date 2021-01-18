@@ -1,6 +1,14 @@
+import os
 import cv2
 
-name = 'Caroline' #replace with your name
+
+name = input("Type your name: ")
+try:
+    userDirPath = "dataset/" + name
+    os.mkdir(userDirPath)
+except:
+    print("Datasets are already exists. ")
+    sys.exit()
 
 cam = cv2.VideoCapture(0)
 
