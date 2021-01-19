@@ -156,11 +156,12 @@ fps.stop()
 print("[INFO] elasped time: {:.2f}".format(fps.elapsed()))
 print("[INFO] approx. FPS: {:.2f}".format(fps.fps()))
 
-# wait for the GPIO thread.
+# thread flag
 shouldTerminate=True
-t1.join()
-
-
+	
 # do a bit of cleanup
 cv2.destroyAllWindows()
 vs.stop()
+
+# wait for the GPIO thread.
+t1.join()
