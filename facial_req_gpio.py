@@ -15,9 +15,14 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(18,GPIO.OUT)
 
+# GPIO 18 pin 
+# Will hold specified secods.
 holdDurationSec = 5
+# Will hold specified secods.
 lastSeenTimeStamp = 0
-lastUser = ""
+# Target user name.
+targetUser = "Kota"
+# Thread flag.
 shouldTerminate=False
 
 def ledThread():
@@ -113,7 +118,10 @@ while True:
 			# of votes (note: in the event of an unlikely tie Python
 			# will select first entry in the dictionary)
 			name = max(counts, key=counts.get)
-			lastSeenTimeStamp = time.time()
+
+			# for GPIO thread to update latest user recognized time.
+			if name == targetUser:
+				lastSeenTimeStamp = time.time()
 			
 			#If someone in your dataset is identified, print their name on the screen
 			if currentname != name:
